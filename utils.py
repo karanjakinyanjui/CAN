@@ -49,8 +49,8 @@ def update_lr(optimizer, current_epoch, current_step, steps, epochs, initial_lr)
         param_group['lr'] = new_lr
 
 
-def save_checkpoint(model, optimizer, word_score, ExpRate_score, epoch, optimizer_save=False, path='checkpoints', multi_gpu=False, local_rank=0):
-    filename = f'{os.path.join(path, model.name)}/{model.name}_WordRate-{word_score:.4f}_ExpRate-{ExpRate_score:.4f}_{epoch}.pth'
+def save_checkpoint(model, model_name, optimizer, word_score, ExpRate_score, epoch, optimizer_save=False, path='checkpoints', multi_gpu=False, local_rank=0):
+    filename = f'{os.path.join(path, model_name)}/{model_name}_WordRate-{word_score:.4f}_ExpRate-{ExpRate_score:.4f}_{epoch}.pth'
     if optimizer_save:
         state = {
             'model': model.state_dict(),

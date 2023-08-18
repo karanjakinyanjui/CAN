@@ -40,9 +40,9 @@ if args.dataset == 'CROHME':
 
 model = CAN(params)
 now = time.strftime("%Y-%m-%d-%H-%M", time.localtime())
-model.name = f'{params["experiment"]}_{now}_decoder-{params["decoder"]["net"]}'
+model_name = f'{params["experiment"]}_{now}_decoder-{params["decoder"]["net"]}'
 
-print(model.name)
+print(model_name)
 # model = torch.nn.DataParallel(model, device_ids=[0, 1])
 
 model = model.to(device)
@@ -50,7 +50,7 @@ model = model.to(device)
 if args.check:
     writer = None
 else:
-    writer = SummaryWriter(f'{params["log_dir"]}/{model.name}')
+    writer = SummaryWriter(f'{params["log_dir"]}/{model_name}')
 
 optimizer = getattr(torch.optim, params['optimizer'])(model.parameters(), lr=float(params['lr']),
                                                       eps=float(params['eps']), weight_decay=float(params['weight_decay']))
@@ -61,9 +61,9 @@ if params['finetune']:
     load_checkpoint(model, optimizer, params['checkpoint'])
 
 if not args.check:
-    if not os.path.exists(os.path.join(params['checkpoint_dir'], model.name)):
-        os.makedirs(os.path.join(params['checkpoint_dir'], model.name), exist_ok=True)
-    os.system(f'cp {config_file} {os.path.join(params["checkpoint_dir"], model.name, model.name)}.yaml')
+    if not os.path.exists(os.path.join(params['checkpoint_dir'], model_name)):
+        os.makedirs(os.path.join(params['checkpoint_dir'], model_name), exist_ok=True)
+    os.system(f'cp {config_file} {os.path.join(params["checkpoint_dir"], model_name, model_name)}.yaml')
 
 """在CROHME上训练"""
 if args.dataset == 'CROHME':
@@ -77,5 +77,5 @@ if args.dataset == 'CROHME':
             print(f'Epoch: {epoch+1} loss: {eval_loss:.4f} word score: {eval_word_score:.4f} ExpRate: {eval_exprate:.4f}')
             if eval_exprate > min_score and not args.check and epoch >= params['save_start']:
                 min_score = eval_exprate
-                save_checkpoint(model, optimizer, eval_word_score, eval_exprate, epoch+1,
+                save_checkpoint(model, model_name, optimizer, eval_word_score, eval_exprate, epoch+1,
                                 optimizer_save=params['optimizer_save'], path=params['checkpoint_dir'])
