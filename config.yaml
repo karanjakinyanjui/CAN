@@ -30,13 +30,13 @@ gradient_clip: True
 use_label_mask: False
 
 # 训练数据
-train_image_path: '/kaggle/input/chrohme/CHROHME/datasets/CROHME/train_images.pkl'
-train_label_path: '/kaggle/input/chrohme/CHROHME/datasets/CROHME/train_labels.txt'
+train_image_path: '/kaggle/input/CROHME/CROHME/datasets/CROHME/train_images.pkl'
+train_label_path: '/kaggle/input/CROHME/CROHME/datasets/CROHME/train_labels.txt'
 
-eval_image_path: '/kaggle/input/chrohme/CHROHME/datasets/CROHME/14_test_images.pkl'
-eval_label_path: '/kaggle/input/chrohme/CHROHME/datasets/CROHME/14_test_labels.txt'
+eval_image_path: '/kaggle/input/CROHME/CROHME/datasets/CROHME/14_test_images.pkl'
+eval_label_path: '/kaggle/input/CROHME/CROHME/datasets/CROHME/14_test_labels.txt'
 
-word_path: '/kaggle/input/chrohme/CHROHME/datasets/CROHME/words_dict.txt'
+word_path: '/kaggle/input/CROHME/CROHME/datasets/CROHME/words_dict.txt'
 
 # collate_fn
 collate_fn: collate_fn
