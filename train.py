@@ -32,8 +32,7 @@ np.random.seed(params['seed'])
 torch.manual_seed(params['seed'])
 torch.cuda.manual_seed(params['seed'])
 
-os.environ['CUDA_VISIBLE_DEVICES'] = '0'
-device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 params['device'] = device
 
 if args.dataset == 'CROHME':
@@ -44,6 +43,8 @@ now = time.strftime("%Y-%m-%d-%H-%M", time.localtime())
 model.name = f'{params["experiment"]}_{now}_decoder-{params["decoder"]["net"]}'
 
 print(model.name)
+model = nn.DataParallel(model, device_ids=[0, 1])
+
 model = model.to(device)
 
 if args.check:
