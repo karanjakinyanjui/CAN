@@ -43,7 +43,7 @@ collate_fn: collate_fn
 
 densenet:
   ratio: 16
-  growthRate: 24
+  growthRate: 12
   reduction: 0.5
   bottleneck: True
   use_dropout: True
