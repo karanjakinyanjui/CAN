@@ -43,7 +43,7 @@ now = time.strftime("%Y-%m-%d-%H-%M", time.localtime())
 model_name = f'{params["experiment"]}_{now}_decoder-{params["decoder"]["net"]}'
 
 print(model_name)
-# model = torch.nn.DataParallel(model, device_ids=[0, 1])
+model = torch.nn.DataParallel(model, device_ids=[0, 1])
 
 model = model.to(device)
 
